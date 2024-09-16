@@ -141,7 +141,7 @@ void MainWindow::whoWon(const QSet<int> &pSeq, const QString winner) {
 
     /* when we check for winner, loop through winningSeqs, see if the player sequence contains a winning one.
      * If so, display winning message and disable all buttons in group,
-     * then break (no need to keep checking for winner... we found it */
+     * then exit early (no need to keep checking for winner... we found it */
     if(winner == "X" || winner == "O") {
         foreach(QSet<int> winningSeq, winningSeqs) {
             if(pSeq.contains(winningSeq)) {
@@ -149,12 +149,12 @@ void MainWindow::whoWon(const QSet<int> &pSeq, const QString winner) {
                 foreach(QAbstractButton *btn, buttonGroup->buttons()) {
                         btn->setDisabled(true);
                 }
-                break;
+                return;
             }
         }
     }
 
-    /* if the board is full and there was no winner */
+    /* if the board is full and there was no winner, fix this!! */
     if(movesCtr > 9) {
         QMessageBox::information(this, "Game Over", QString("Game was a Draw"));
     }
