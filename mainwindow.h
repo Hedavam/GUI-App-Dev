@@ -35,8 +35,9 @@ public:
     QSet<int> p1Seq;
     QSet<int> p2Seq;
     QSet<QSet<int>> winningSeqs;
-    void whoWon(const QSet<int> &winningSeq, const QString player); /* pass the complex set DS by reference but the simple int by value;
-                                                                     * const b/cuz we don't need the func to modify the values */
+    void whoWon(const QSet<int> &winningSeq, QString player); /* pass the complex set DS by reference (does not make a copy) but the simple int by value;
+                                                                     * const b/cuz we don't need the func to modify the winningSeqs,
+                                                                     * don't need const for 2nd arg cuz it's passed by value so it can't be modded */
 
 public slots: /* accessible from outside the class - public so that QObject's connect() could work */
     void tileToggled(QAbstractButton *btn, bool checked); /* int specifiying the ID of the toggled tile - needs to match signature of toggled signal */
